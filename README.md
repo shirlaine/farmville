@@ -1,7 +1,7 @@
-# Readme for Rails-Template
+# Readme for Farmville
 
 ## Description
-This repository contains a quickstart template for a new rails app using the postgresql database, and rspec testing framework
+This repository contains a sandbox rails app
 
 ## Quickstart guide
 
