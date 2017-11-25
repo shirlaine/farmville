@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171125052007) do
+ActiveRecord::Schema.define(version: 20171125053552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 20171125052007) do
   create_table "farms", force: :cascade do |t|
     t.string "title", null: false
     t.string "url"
-    t.integer "kind"
     t.boolean "completed?", default: false
     t.datetime "completed_time"
     t.integer "t_reach"
@@ -62,6 +61,12 @@ ActiveRecord::Schema.define(version: 20171125052007) do
     t.datetime "updated_at", null: false
     t.index ["location_id"], name: "index_farms_on_location_id"
     t.index ["user_id"], name: "index_farms_on_user_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "place", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
