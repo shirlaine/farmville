@@ -24,9 +24,18 @@ Location.find_or_create_by!(
 
 puts "Seeding data for 1 farm"
 
-Farm.create(
+Farm.find_or_create_by!(
     title: 'Ghengkis farm', #=> 7
     url: 'Faker::HowIMetYourMother.quote',
     user_id: 1,
     location_id: 1
     )
+
+puts "Seeding data for 1 animal"
+
+Animal.find_or_create_by!(
+  name: 'Dog #1',
+  url: 'www.facebook.com/dog#1',
+  completed?: true,
+  farm_id: 1
+  )
