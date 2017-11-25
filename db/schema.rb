@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171124111418) do
+ActiveRecord::Schema.define(version: 20171125081159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,43 @@ ActiveRecord::Schema.define(version: 20171124111418) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "animals", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "url"
+    t.integer "kind"
+    t.boolean "completed?", default: false
+    t.datetime "completed_time"
+    t.integer "reach"
+    t.integer "engagement"
+    t.integer "view"
+    t.bigint "farm_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["farm_id"], name: "index_animals_on_farm_id"
+  end
+
+  create_table "farms", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "url"
+    t.boolean "completed?", default: false
+    t.datetime "completed_time"
+    t.integer "t_reach"
+    t.integer "t_engagement"
+    t.integer "t_views"
+    t.bigint "user_id"
+    t.bigint "location_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_farms_on_location_id"
+    t.index ["user_id"], name: "index_farms_on_user_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "place", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
