@@ -5,17 +5,14 @@ This repository contains a sandbox rails app
 
 ## Quickstart guide
 
-$`git clone https://github.com/shirlaine/rails-template.git`
+$`git clone https://github.com/shirlaine/farmville.git`
 
-$`cd rails-template`
+$`cd farmville`
 
 $`bundle install`
 
 ## Database Setup
 - `$ bin/rake db:create`
-
-## Integration Test Setup
-- under .circleci/config.yml, replace `rails-template` with `your-app-name`
 
 ## Gem List
 - Development:
