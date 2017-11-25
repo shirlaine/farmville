@@ -1,7 +1,7 @@
 class CreateFarms < ActiveRecord::Migration[5.1]
   def change
     create_table :farms do |t|
-      t.string :name, null: false
+      t.string :title, null: false
       t.string :url
       t.integer :kind
       t.boolean :completed?, default: false
