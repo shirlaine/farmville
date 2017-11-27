@@ -1,1 +1,11 @@
 <h1>Pages#Index</h1>
+
+<span>
+<% if current_admin.superadmin? %>
+<%= link_to 'Go to Superindex', superindex_path %>
+<% end %>
+</span>
+
+<span>
+<%= link_to 'Button', superindex_path %>
+</span>
