@@ -1,0 +1,20 @@
+<h1>Pages#SuperIndex</h1>
+
+<table class= "table">
+  <thead>
+    <th>Email: </th>
+    <th>Superadmin Status:</th>
+    <th></th>
+  </thead>
+<% @admins.each do |admin| %>
+  <tbody>
+    <td><%= admin.email %></td>
+    <td><%= admin.superadmin %></td>
+    <td><% if admin.superadmin? %>
+      <%= link_to "Toggle to False", superfalse_admin_path(admin), method: :put %>
+      <% else %>
+      <%= link_to "Toggle to True", supertrue_admin_path(admin), method: :put  %>
+      <% end %>
+  </tbody>
+<% end %>
+</table>
