@@ -10,4 +10,6 @@ Rails.application.routes.draw do
     put 'superfalse', on: :member, to: 'pages#superfalse'
   end
 
+  get 'apis/retrieve', to: 'apis#retrieve'
+
 end
