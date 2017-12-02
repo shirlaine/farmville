@@ -1,5 +1,6 @@
 class InstagramPost < ApplicationRecord
 
-  has_many :images, as: :imageable
+  belongs_to :campaign
+  has_many :images, as: :imageable, dependent: :destroy
 
 end
