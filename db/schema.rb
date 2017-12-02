@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171202084921) do
+ActiveRecord::Schema.define(version: 20171202085629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,8 @@ ActiveRecord::Schema.define(version: 20171202084921) do
     t.integer "follows", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "campaign_id"
+    t.index ["campaign_id"], name: "index_tweet_posts_on_campaign_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -178,4 +180,5 @@ ActiveRecord::Schema.define(version: 20171202084921) do
   add_foreign_key "campaigns", "users"
   add_foreign_key "facebook_posts", "campaigns"
   add_foreign_key "instagram_posts", "campaigns"
+  add_foreign_key "tweet_posts", "campaigns"
 end
