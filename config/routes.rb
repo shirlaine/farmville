@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   end
 
   get 'apis/retrieve', to: 'apis#retrieve'
+  get 'apis/facebook', to: 'apis#facebook'
 
 end
