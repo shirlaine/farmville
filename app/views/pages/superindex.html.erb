@@ -1,14 +1,23 @@
 <h1>Pages#SuperIndex</h1>
 
+<%= link_to "Create new Admin", new_admin_registration_path %>
+<br/>
+<%= link_to "Create new User", new_user_registration_path %>
+
 <table class= "table">
   <thead>
     <th>Email: </th>
+    <th>Clients </th>
     <th>Superadmin Status:</th>
-    <th></th>
+    <th>Toggle</th>
   </thead>
 <% @admins.each do |admin| %>
   <tbody>
     <td><%= admin.email %></td>
+    <td><% admin.users.each do |user| %>
+        <%= user.email %>
+        <% end %>
+    </td>
     <td><%= admin.superadmin %></td>
     <td><% if admin.superadmin? %>
       <%= link_to "Toggle to False", superfalse_admin_path(admin), method: :put %>

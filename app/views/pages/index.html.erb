@@ -5,7 +5,9 @@
 <%= link_to 'Go to Superindex', superindex_path %>
 <% end %>
 </span>
-
+<%= link_to "Create new User", new_user_registration_path %>
 <span>
 <%= link_to 'Button', superindex_path %>
 </span>
+
+<%= link_to 'Sign Out',destroy_admin_session_path, method: :delete %> 
