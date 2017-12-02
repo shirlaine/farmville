@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :farm do
+  factory :instagram_post do
     
   end
 end

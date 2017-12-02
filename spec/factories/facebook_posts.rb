@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :animal do
+  factory :facebook_post do
     
   end
 end

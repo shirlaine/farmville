@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127035925) do
+ActiveRecord::Schema.define(version: 20171202095448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,41 +33,103 @@ ActiveRecord::Schema.define(version: 20171127035925) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "animals", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "url"
-    t.integer "kind"
-    t.boolean "completed?", default: false
-    t.datetime "completed_time"
-    t.integer "reach"
-    t.integer "engagement"
-    t.integer "view"
-    t.bigint "farm_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["farm_id"], name: "index_animals_on_farm_id"
-  end
-
-  create_table "farms", force: :cascade do |t|
+  create_table "campaigns", force: :cascade do |t|
     t.string "title", null: false
-    t.string "url"
+    t.text "description"
+    t.datetime "end_time"
     t.boolean "completed?", default: false
-    t.datetime "completed_time"
-    t.integer "t_reach"
-    t.integer "t_engagement"
-    t.integer "t_views"
+    t.integer "t_reach", default: 0
+    t.integer "t_engagement", default: 0
+    t.integer "t_view", default: 0
     t.bigint "user_id"
-    t.bigint "location_id"
+    t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["location_id"], name: "index_farms_on_location_id"
-    t.index ["user_id"], name: "index_farms_on_user_id"
+    t.index ["category_id"], name: "index_campaigns_on_category_id"
+    t.index ["user_id"], name: "index_campaigns_on_user_id"
   end
 
-  create_table "locations", force: :cascade do |t|
-    t.string "place", null: false
+  create_table "categories", force: :cascade do |t|
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "facebook_posts", force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "medium"
+    t.string "description"
+    t.string "url"
+    t.string "access_token"
+    t.string "url_postid"
+    t.datetime "end_time"
+    t.boolean "completed?", default: false
+    t.integer "people_reached", default: 0
+    t.integer "impressions", default: 0
+    t.integer "stories", default: 0
+    t.integer "like", default: 0
+    t.integer "love", default: 0
+    t.integer "haha", default: 0
+    t.integer "wow", default: 0
+    t.integer "sad", default: 0
+    t.integer "angry", default: 0
+    t.integer "comments", default: 0
+    t.integer "shares", default: 0
+    t.integer "post_clicks", default: 0
+    t.integer "link_clicks", default: 0
+    t.integer "other_clicks", default: 0
+    t.bigint "campaign_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["campaign_id"], name: "index_facebook_posts_on_campaign_id"
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "file_location", null: false
+    t.string "caption"
+    t.string "imageable_type"
+    t.bigint "imageable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
+  end
+
+  create_table "instagram_posts", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description"
+    t.string "url"
+    t.string "end_time"
+    t.boolean "completed?", default: false
+    t.integer "likes", default: 0
+    t.integer "comments", default: 0
+    t.bigint "campaign_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["campaign_id"], name: "index_instagram_posts_on_campaign_id"
+  end
+
+  create_table "tweet_posts", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description"
+    t.string "url"
+    t.datetime "end_time"
+    t.boolean "completed?", default: false
+    t.integer "reach", default: 0
+    t.integer "engagement", default: 0
+    t.integer "impressions", default: 0
+    t.integer "total_engagements", default: 0
+    t.integer "media_engagements", default: 0
+    t.integer "detail_expands", default: 0
+    t.integer "retweets", default: 0
+    t.integer "likes", default: 0
+    t.integer "link_clicks", default: 0
+    t.integer "profile_clicks", default: 0
+    t.integer "replies", default: 0
+    t.integer "follows", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "campaign_id"
+    t.index ["campaign_id"], name: "index_tweet_posts_on_campaign_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -87,4 +149,9 @@ ActiveRecord::Schema.define(version: 20171127035925) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "campaigns", "categories"
+  add_foreign_key "campaigns", "users"
+  add_foreign_key "facebook_posts", "campaigns"
+  add_foreign_key "instagram_posts", "campaigns"
+  add_foreign_key "tweet_posts", "campaigns"
 end
