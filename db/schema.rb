@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127035925) do
+ActiveRecord::Schema.define(version: 20171202081106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,43 @@ ActiveRecord::Schema.define(version: 20171127035925) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["farm_id"], name: "index_animals_on_farm_id"
+  end
+
+  create_table "campaigns", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description"
+    t.datetime "end_time"
+    t.boolean "completed?", default: false
+    t.integer "t_reach", default: 0
+    t.integer "t_engagement", default: 0
+    t.integer "t_view", default: 0
+    t.bigint "user_id"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_campaigns_on_category_id"
+    t.index ["user_id"], name: "index_campaigns_on_user_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "facebook_posts", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "url"
+    t.integer "kind"
+    t.boolean "completed?", default: false
+    t.datetime "completed_time"
+    t.integer "reach"
+    t.integer "engagement"
+    t.integer "view"
+    t.bigint "farm_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["farm_id"], name: "index_facebook_posts_on_farm_id"
   end
 
   create_table "farms", force: :cascade do |t|
@@ -87,4 +124,6 @@ ActiveRecord::Schema.define(version: 20171127035925) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "campaigns", "categories"
+  add_foreign_key "campaigns", "users"
 end
