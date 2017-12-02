@@ -72,17 +72,31 @@ ActiveRecord::Schema.define(version: 20171202081106) do
 
   create_table "facebook_posts", force: :cascade do |t|
     t.string "title", null: false
+    t.integer "medium"
+    t.string "description"
     t.string "url"
-    t.integer "kind"
+    t.string "access_token"
+    t.string "url_postid"
+    t.datetime "end_time"
     t.boolean "completed?", default: false
-    t.datetime "completed_time"
-    t.integer "reach"
-    t.integer "engagement"
-    t.integer "view"
-    t.bigint "farm_id"
+    t.integer "people_reached", default: 0
+    t.integer "impressions", default: 0
+    t.integer "stories", default: 0
+    t.integer "like", default: 0
+    t.integer "love", default: 0
+    t.integer "haha", default: 0
+    t.integer "wow", default: 0
+    t.integer "sad", default: 0
+    t.integer "angry", default: 0
+    t.integer "comments", default: 0
+    t.integer "shares", default: 0
+    t.integer "post_clicks", default: 0
+    t.integer "link_clicks", default: 0
+    t.integer "other_clicks", default: 0
+    t.bigint "campaign_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["farm_id"], name: "index_facebook_posts_on_farm_id"
+    t.index ["campaign_id"], name: "index_facebook_posts_on_campaign_id"
   end
 
   create_table "farms", force: :cascade do |t|
@@ -126,4 +140,5 @@ ActiveRecord::Schema.define(version: 20171202081106) do
 
   add_foreign_key "campaigns", "categories"
   add_foreign_key "campaigns", "users"
+  add_foreign_key "facebook_posts", "campaigns"
 end
