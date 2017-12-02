@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171202084156) do
+ActiveRecord::Schema.define(version: 20171202084921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,20 @@ ActiveRecord::Schema.define(version: 20171202084156) do
     t.index ["user_id"], name: "index_farms_on_user_id"
   end
 
+  create_table "instagram_posts", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "description"
+    t.string "url"
+    t.string "end_time"
+    t.boolean "completed?", default: false
+    t.integer "likes", default: 0
+    t.integer "comments", default: 0
+    t.bigint "campaign_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["campaign_id"], name: "index_instagram_posts_on_campaign_id"
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string "place", null: false
     t.datetime "created_at", null: false
@@ -163,4 +177,5 @@ ActiveRecord::Schema.define(version: 20171202084156) do
   add_foreign_key "campaigns", "categories"
   add_foreign_key "campaigns", "users"
   add_foreign_key "facebook_posts", "campaigns"
+  add_foreign_key "instagram_posts", "campaigns"
 end
