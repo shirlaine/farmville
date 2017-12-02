@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171202085629) do
+ActiveRecord::Schema.define(version: 20171202090233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,19 @@ ActiveRecord::Schema.define(version: 20171202085629) do
     t.datetime "updated_at", null: false
     t.index ["location_id"], name: "index_farms_on_location_id"
     t.index ["user_id"], name: "index_farms_on_user_id"
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "file_location", null: false
+    t.string "caption"
+    t.bigint "facebook_post_id"
+    t.bigint "tweet_post_id"
+    t.bigint "instagram_post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["facebook_post_id"], name: "index_images_on_facebook_post_id"
+    t.index ["instagram_post_id"], name: "index_images_on_instagram_post_id"
+    t.index ["tweet_post_id"], name: "index_images_on_tweet_post_id"
   end
 
   create_table "instagram_posts", force: :cascade do |t|
