@@ -9,35 +9,35 @@
 
 # Puts Seed for Farms
 
-puts "Seeding data for 1 farmer"
+puts "Seeding data for 1 user"
 
-user = User.find_or_initialize_by(email: "farmer1@gmail.com")
+user = User.find_or_initialize_by(email: "user1@gmail.com")
 user.password = '111111'
 user.save
 
 
-puts "Seeding data for 1 location"
+puts "Seeding data for 1 category"
 
-# Location.find_or_create_by!(
-#   place: 'East'
-#   )
+Category.find_or_create_by!(
+  name: 'Telecoms'
+  )
 
-puts "Seeding data for 1 farm"
+puts "Seeding data for 1 campaign"
 
-# Farm.find_or_create_by!(
-#     title: 'Ghengkis farm', #=> 7
-#     url: 'Faker::HowIMetYourMother.quote',
+# Campaign.find_or_create_by!(
+#     title: 'Singtel', #=> 7
+#     description: 'Faker::HowIMetYourMother.quote',
 #     user_id: 1,
-#     location_id: 1
+#     category_id: 1
 #     )
 
-puts "Seeding data for 1 animal"
+puts "Seeding data for 1 facebook_post"
 
-# Animal.find_or_create_by!(
-#   name: 'Dog #1',
+# FacebookPost.find_or_create_by!(
+#   title: 'Singtel FB #1',
 #   url: 'www.facebook.com/dog#1',
 #   completed?: true,
-#   farm_id: 1
+#   campaign_id: 1
   )
 
 
