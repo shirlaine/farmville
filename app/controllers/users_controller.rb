@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 
-  before_action :authenticate_admin!
   before_action :authenticate_superadmin
 
 
@@ -25,9 +24,10 @@ class UsersController < ApplicationController
   end
 
   def authenticate_superadmin
-    unless current_admin.superadmin?
-    redirect_to root_path
-    end
+    authenticate_admin!
+      unless current_admin.superadmin?
+      redirect_to root_path
+      end
   end
 
 end
