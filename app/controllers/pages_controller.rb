@@ -2,13 +2,15 @@ class PagesController < ApplicationController
 
 before_action :authenticate_admin!
 
-  def index; end
+  def index
+  end
 
   def superindex
     unless current_admin.superadmin?
     redirect_to root_path
     end
     @admins = Admin.all
+    # byebug
   end
 
   def supertrue

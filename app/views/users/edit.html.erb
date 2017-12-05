@@ -1,0 +1,14 @@
+<h2>Edit User</h2>
+
+<%= simple_form_for(@user, url: user_path(@user), method: :put) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <p>Current Account Manager: <%= @user.admin.email%></p>
+    <%= f.input :admin_id, label: "New Manager", collection: Admin.all.collect { |admin| [admin.email, admin.id]}, required: true, autofocus: true, selected: current_admin.id %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Change Details" %>
+  </div>
+<% end %>
